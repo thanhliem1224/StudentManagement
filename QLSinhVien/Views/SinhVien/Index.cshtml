@@ -1,0 +1,132 @@
+﻿@model IEnumerable<QLSinhVien.Models.SinhVien>
+
+@{
+    ViewBag.Title = "Danh Sách Sinh Viên";
+}
+
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+        <h2 class="text-center">@ViewBag.Title</h2>
+    </div>
+    <div class="col-md-2">
+        <br />
+    </div>
+    <div class="col-md-2">
+        <div class="text-right">
+            <div class="dropdown ">
+                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">
+                    Thêm sinh viên
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>@Html.ActionLink("Nhập tay", "Create", "SinhVien")</li>
+                    <li>@Html.ActionLink("Thêm từ file", "ThemTuFile", "SinhVien")</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+<div class="row">
+    @using (Html.BeginForm("Index", "SinhVien", FormMethod.Get))
+    {
+        <div class="col-md-3">
+            <label for="tenHS" class="control-label">Tìm học sinh</label>
+            @Html.TextBox("ten", null, new { @class = "form-control", @id = "ten", @placeholder = "Tên Sinh Viên" })
+        </div>
+        <div class="col-md-1">
+            <div class="control-label">
+                <br />
+            </div>
+            <button type="submit" class="btn btn-primary col-md-12">Tìm</button>
+        </div>
+    }
+    @using (Html.BeginForm("HienTatCa", "SinhVien", FormMethod.Get))
+    {
+        <div class="col-md-2">
+            <div class="control-label">
+                <br />
+            </div>
+            <button type="submit" class="btn btn-primary col-md-12">Hiện tất cả</button>
+        </div>
+    }
+</div>
+@if (TempData["Message_Fa"] != null)
+            {
+    <p class="text-center text-danger">@TempData["Message_Fa"]</p>
+}
+
+<br />
+@if (ViewBag.SinhVien != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ho)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ten)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GioiTinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgaySinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoiSinh)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoDienThoai)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+        </tr>
+
+        @foreach (var item in ViewBag.SinhVien)
+        {
+            string url = "/SinhVien/Details/" + item.ID;
+            <tr class='clickable-row' data-href='@url'>
+                <td>
+                    @item.Ho
+                </td>
+                <td>
+                    @item.Ten
+                </td>
+                <td>
+                    @item.GioiTinh
+                </td>
+                <td>
+                    @item.NgaySinh.ToShortDateString()
+                </td>
+                <td>
+                    @item.NoiSinh
+                </td>
+                <td>
+                    @item.DiaChi
+                </td>
+                <td>
+                    @item.SoDienThoai
+                </td>
+                <td>
+                    @item.Email
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+@section Scripts{
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $(".clickable-row").click(function () {
+                window.document.location = $(this).data("href");
+            });
+        });
+    </script>
+}

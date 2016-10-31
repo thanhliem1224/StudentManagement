@@ -1,0 +1,233 @@
+﻿@model QLSinhVien.Models.KhoaHoc
+@{
+    ViewBag.Title = "KhoaHoc";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Đăng Ký Khóa Học</h2>
+<br />
+<div>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 class="text-center">@Html.DisplayFor(model => model.TenKhoaHoc)</h2>
+            <dl class="dl-horizontal">
+                <dt>
+                    Sinh Viên Đã Đăng Ký
+                </dt>
+                <dd>
+                    @ViewBag.DSSinhVienCount
+                </dd>
+            </dl>
+        </div>
+        <div class="col-md-6">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <div class="row">
+                        @using (Html.BeginForm())
+                        {
+                            <div class="col-md-8">
+                                <label class="control-label">Tìm tên sinh viên</label>
+                                <input type="text" name="tenSV" class="form-control" />
+                            </div>
+                            <div class="col-md-4">
+                                <br />
+                                <input type="submit" value="Tìm" class="btn btn-primary" />
+                            </div>
+                        }
+                        @if (TempData["Success"] != null)
+                        {
+                            <h5 class="text-success">@TempData["Success"]</h5>
+                        }
+                    </div>
+                    <div class="row">
+                        @if (ViewBag.KQTimKiemSV == null)
+                        {
+                            <h5 class="text-danger">@TempData["Search_result"]</h5>
+                        }
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<div>
+    @Html.ActionLink("Tìm Khóa Học Khác", "TimKhoaHoc", "DangKyKhoaHoc") |
+</div>
+<br />
+
+<div class="row">
+    <div class="col-md-6">
+        @if (ViewBag.DSSinhVien != null)
+        {
+            <div class="table-responsive">
+                <h3 class="text-center">Danh sách sinh viên trong lớp</h3>
+                <table class="table">
+                    <tr>
+                        <th>
+                            Tên
+                        </th>
+                        <th>
+                            Ngày sinh
+                        </th>
+                        <th>
+                            Số ĐT
+                        </th>
+                    </tr>
+                    @foreach (var item in ViewBag.DSSinhVien)
+                    {
+                        <tr>
+                            <td>
+                                @item.SinhVien.HoVaTen
+                            </td>
+                            <td>
+                                @item.SinhVien.NgaySinh.ToShortDateString()
+                            </td>
+                            <td>
+                                @item.SinhVien.SoDienThoai
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
+        else
+        {
+            <p>Chưa có sinh viên đăng ký khóa học này </p>
+        }
+    </div>
+
+    <div class="col-md-6">
+        @if (ViewBag.KQTimKiemSV != null)
+        {
+            <div class="table-responsive">
+                <h3 class="text-center">@TempData["Search_result"]</h3>
+                <table class="table" id="table_search">
+                    <thead>
+                        <tr>
+                            <th>
+                                Họ
+                            </th>
+                            <th>
+                                Tên
+                            </th>
+                            <th>
+                                Ngày sinh
+                            </th>
+                            <th>
+                                Số ĐT
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.KQTimKiemSV)
+                {
+                            <tr class='clickable-row' data-href='@item.ID#@item.HoVaTen#@Model.TenKhoaHoc'>
+                                <td>
+                                    @item.Ho
+                                </td>
+                                <td>
+                                    @item.Ten
+                                </td>
+                                <td>
+                                    @item.NgaySinh.ToShortDateString()
+                                </td>
+                                <td>
+                                    @item.SoDienThoai
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        }
+    </div>
+
+
+</div>
+
+<button id="popup" type="button" class="btn btn-info btn-lg hidden" data-toggle="modal" data-target="#myModal">Open Modal</button>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Xác Nhận Đăng Ký Khóa Học</h4>
+            </div>
+            <div class="modal-body">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Lớp
+                    </dt>
+                    <dd>
+                        <p id="tenkhoahoc"></p>
+                    </dd>
+                    <dt>
+                        Sinh Viên
+                    </dt>
+                    <dd>
+                        <p id="tensinhvien"></p>
+                    </dd>
+                </dl>
+            </div>
+            <div class="modal-footer">
+                <button id="ConfirmSubmit" type="button" class="btn btn-success">Đồng Ý</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@using (Html.BeginForm("Create", "DangKyKhoaHoc", null, FormMethod.Post, new { @id = "formCreate", @class = "hidden" }))
+{
+    @Html.AntiForgeryToken()
+    <input id="SinhVienID" name="SinhVienID" />
+    <input id="KhoaHocID" name="KhoaHocID" />
+    <input type="submit" />
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        //var table = document.getElementsByTagName("table")[0];
+        //var tbody = table.getElementsByTagName("tbody")[0];
+        //tbody.onclick = function (e) {
+        //    e = e || window.event;
+        //    var data;
+        //    var target = e.srcElement || e.target;
+        //    while (target && target.nodeName !== "TR") {
+        //        target = target.parentNode;
+        //    }
+        //    if (target) {
+        //        var cells = target.getElementsByTagName("td");
+        //        data = cells[0].innerHTML;
+        //        //for (var i = 0; i < cells.length; i++) {
+        //        //    data.push(cells[i].innerHTML);
+        //        //}
+        //    }
+        //    alert(data);
+        //};
+        jQuery(document).ready(function ($) {
+            $(".clickable-row").click(function () {
+                var data = $(this).data("href").split('#');
+
+                var kh = @Model.ID;
+                $("#KhoaHocID").val(kh);
+                $("#SinhVienID").val(data[0]);
+
+
+                $("#tensinhvien").text(data[1]);
+                $("#tenkhoahoc").text(data[2]);
+                document.getElementById("popup").click()
+            });
+
+            $("#ConfirmSubmit").click(function(){
+                $("#formCreate").submit();
+            })
+        });
+    </script>
+}
