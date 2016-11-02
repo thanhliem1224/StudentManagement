@@ -13,14 +13,14 @@ namespace QLSinhVien.Controllers
     public class MonHocController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
+        [Authorize]
         // GET: MonHoc
         public ActionResult Index()
         {
             var monHoc = db.MonHoc.Include(m => m.KhoaHoc);
             return View(monHoc.ToList());
         }
-
+        [Authorize]
         // GET: MonHoc/Details/5
         public ActionResult Details(int? id)
         {
@@ -35,7 +35,7 @@ namespace QLSinhVien.Controllers
             }
             return View(monHoc);
         }
-
+        [Authorize]
         // GET: MonHoc/Create
         public ActionResult Create()
         {
@@ -62,6 +62,7 @@ namespace QLSinhVien.Controllers
         }
 
         // GET: MonHoc/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -95,6 +96,7 @@ namespace QLSinhVien.Controllers
         }
 
         // GET: MonHoc/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)

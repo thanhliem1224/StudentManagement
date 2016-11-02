@@ -1,14 +1,23 @@
 ﻿@model IEnumerable<QLSinhVien.Models.MonHoc>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Danh Sách Môn Học";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div class="row">
+    <div class="col-md-offset-2 col-md-8">
+        <h2 class="text-center">@ViewBag.Title</h2>
+    </div>
+    <div class="col-md-2">
+        <br />
+    </div>
+    <div class="col-md-2">
+        <div class="text-right">
+            <a href="~/MonHoc/Create" class="btn btn-success active" role="button">Thêm</a>
+        </div>
+    </div>
+</div>
+<br />
 <table class="table">
     <tr>
         <th>
@@ -17,21 +26,15 @@
         <th>
             @Html.DisplayNameFor(model => model.TenMonHoc)
         </th>
-        <th></th>
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
+    <tr onclick="location.href = '@(Url.Action("Edit", "MonHoc", new { id = item.ID}))'">
         <td>
             @Html.DisplayFor(modelItem => item.KhoaHoc.TenKhoaHoc)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.TenMonHoc)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
         </td>
     </tr>
 }

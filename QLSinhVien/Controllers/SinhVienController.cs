@@ -22,6 +22,7 @@ namespace QLSinhVien.Controllers
             return RedirectToAction("Index", "SinhVien", new { show_all = true });
         }
 
+        [Authorize]
         // GET: SinhVien
         public ActionResult Index(string ten, bool? show_all)
         {
@@ -56,6 +57,7 @@ namespace QLSinhVien.Controllers
             return View();
         }
 
+        [Authorize]
         // GET: SinhVien/Details/5
         public ActionResult Details(int? id)
         {
@@ -70,7 +72,7 @@ namespace QLSinhVien.Controllers
             }
             return View(sinhVien);
         }
-
+        [Authorize]
         // GET: SinhVien/Create
         public ActionResult Create()
         {
@@ -93,7 +95,7 @@ namespace QLSinhVien.Controllers
 
             return View(sinhVien);
         }
-
+        [Authorize]
         public ActionResult ThemTuFile()
         {
             return View();
@@ -194,7 +196,7 @@ namespace QLSinhVien.Controllers
             return View();
         }
 
-
+        [Authorize]
         // GET: SinhVien/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -225,7 +227,7 @@ namespace QLSinhVien.Controllers
             }
             return View(sinhVien);
         }
-
+        [Authorize]
         // GET: SinhVien/Delete/5
         public ActionResult Delete(int? id)
         {

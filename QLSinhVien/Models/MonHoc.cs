@@ -11,7 +11,7 @@ namespace QLSinhVien.Models
         public int ID { get; set; }
         [Display(Name = "Tên Môn Học")]
         public string TenMonHoc { get; set; }
-
+        [Display(Name = "Tên Khóa Học")]
         public int KhoaHocID { get; set; }
 
         public virtual KhoaHoc KhoaHoc { get; set; }

@@ -15,12 +15,14 @@ namespace QLSinhVien.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: KhoaHoc
+        [Authorize]
         public ActionResult Index()
         {
             return View(db.KhoaHoc.ToList());
         }
 
         // GET: KhoaHoc/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,6 +38,7 @@ namespace QLSinhVien.Controllers
         }
 
         // GET: KhoaHoc/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -59,6 +62,7 @@ namespace QLSinhVien.Controllers
         }
 
         // GET: KhoaHoc/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -90,6 +94,7 @@ namespace QLSinhVien.Controllers
         }
 
         // GET: KhoaHoc/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)

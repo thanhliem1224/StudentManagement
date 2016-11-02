@@ -15,6 +15,7 @@ namespace QLSinhVien.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: DangKyKhoaHoc
+        [Authorize]
         public ActionResult Index()
         {
             var dangKyKhoaHoc = db.DangKyKhoaHoc.Include(d => d.KhoaHoc).Include(d => d.SinhVien);
@@ -22,6 +23,7 @@ namespace QLSinhVien.Controllers
         }
 
         // GET: DangKyKhoaHoc/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -37,6 +39,7 @@ namespace QLSinhVien.Controllers
         }
 
         // GET: DangKyLop/TimKhoaHoc
+        [Authorize]
         public ActionResult TimKhoaHoc(string tenKhoaHoc)
         {
             if (!string.IsNullOrEmpty(tenKhoaHoc))
@@ -126,7 +129,7 @@ namespace QLSinhVien.Controllers
             {
                 db.DangKyKhoaHoc.Add(dangKyKhoaHoc);
                 db.SaveChanges();
-                return RedirectToAction("KhoaHoc", "DangKyKhoaHoc", new { id = dangKyKhoaHoc.KhoaHocID});
+                return RedirectToAction("KhoaHoc", "DangKyKhoaHoc", new { id = dangKyKhoaHoc.KhoaHocID });
             }
 
             ViewBag.KhoaHocID = new SelectList(db.KhoaHoc, "ID", "TenKhoaHoc", dangKyKhoaHoc.KhoaHocID);
@@ -135,6 +138,7 @@ namespace QLSinhVien.Controllers
         }
 
         // GET: DangKyKhoaHoc/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -170,6 +174,7 @@ namespace QLSinhVien.Controllers
         }
 
         // GET: DangKyKhoaHoc/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
