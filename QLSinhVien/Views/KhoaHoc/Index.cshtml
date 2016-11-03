@@ -18,31 +18,36 @@
     </div>
 </div>
 <br />
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TenKhoaHoc)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThoiGianBatDau)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThoiGianKetThuc)
-        </th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr onclick="location.href = '@(Url.Action("Edit", "KhoaHoc", new { id = item.ID}))'">
-        <td>
-            @Html.DisplayFor(modelItem => item.TenKhoaHoc)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ThoiGianBatDau)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ThoiGianKetThuc)
-        </td>
-    </tr>
-}
-
-</table>
+<div class="table-responsive">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TenKhoaHoc)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ThoiGianBatDau)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ThoiGianKetThuc)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr onclick="location.href = '@(Url.Action("Details", "KhoaHoc", new { id = item.ID}))'">
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TenKhoaHoc)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ThoiGianBatDau)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ThoiGianKetThuc)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

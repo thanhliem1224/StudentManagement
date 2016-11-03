@@ -34,6 +34,14 @@ namespace QLSinhVien.Controllers
             {
                 return HttpNotFound();
             }
+            var dsmh = db.MonHoc.Where(m => m.KhoaHocID == id);
+            if (dsmh.Count() > 0)
+            {
+                ViewBag.DSMonHoc = dsmh;
+                @TempData["SLMonHoc"] = dsmh.Count();
+            }
+            else { @TempData["SLMonHoc"] = 0; }
+            
             return View(khoaHoc);
         }
 

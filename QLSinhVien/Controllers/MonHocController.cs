@@ -35,13 +35,35 @@ namespace QLSinhVien.Controllers
             }
             return View(monHoc);
         }
+
         [Authorize]
-        // GET: MonHoc/Create
-        public ActionResult Create()
+        public ActionResult TimKhoaHoc(string tenKhoaHoc)
         {
-            ViewBag.KhoaHocID = new SelectList(db.KhoaHoc, "ID", "TenKhoaHoc");
+            if (!string.IsNullOrEmpty(tenKhoaHoc))
+            {
+                var dstk = db.KhoaHoc.Where(k => k.TenKhoaHoc.Contains(tenKhoaHoc));
+                if (dstk.Count() > 0) // nếu có kết quả
+                {
+                    TempData["Title"] = "Kết quả tìm kiếm " + tenKhoaHoc + "(" + dstk.Count() + " kết quả)";
+                    ViewBag.DSTimKiemKhoaHoc = dstk;
+                }
+                else
+                {
+                    TempData["Message_Fa"] = "Không tìm thấy khóa học \"" + tenKhoaHoc + "\"";
+                }
+
+            }
             return View();
         }
+
+
+
+        //[Authorize]
+        //// GET: MonHoc/Create
+        //public ActionResult Create(string tenKhoaHoc, string tenMonHoc)
+        //{
+        //    return View();
+        //}
 
         // POST: MonHoc/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -54,10 +76,10 @@ namespace QLSinhVien.Controllers
             {
                 db.MonHoc.Add(monHoc);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "KhoaHoc", new { id = monHoc.KhoaHocID});
             }
 
-            ViewBag.KhoaHocID = new SelectList(db.KhoaHoc, "ID", "TenKhoaHoc", monHoc.KhoaHocID);
+            //ViewBag.KhoaHocID = new SelectList(db.KhoaHoc, "ID", "TenKhoaHoc", monHoc.KhoaHocID);
             return View(monHoc);
         }
 
