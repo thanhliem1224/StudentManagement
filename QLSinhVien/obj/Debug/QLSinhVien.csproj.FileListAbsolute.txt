@@ -17,6 +17,8 @@ C:\Project\QLSinhVien\QLSinhVien\bin\QLSinhVien.pdb
 C:\Project\QLSinhVien\QLSinhVien\bin\Antlr3.Runtime.dll
 C:\Project\QLSinhVien\QLSinhVien\bin\EntityFramework.dll
 C:\Project\QLSinhVien\QLSinhVien\bin\EntityFramework.SqlServer.dll
+C:\Project\QLSinhVien\QLSinhVien\bin\Excel.dll
+C:\Project\QLSinhVien\QLSinhVien\bin\ICSharpCode.SharpZipLib.dll
 C:\Project\QLSinhVien\QLSinhVien\bin\Microsoft.AI.Agent.Intercept.dll
 C:\Project\QLSinhVien\QLSinhVien\bin\Microsoft.AI.DependencyCollector.dll
 C:\Project\QLSinhVien\QLSinhVien\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -48,6 +50,7 @@ C:\Project\QLSinhVien\QLSinhVien\bin\System.Web.WebPages.Deployment.dll
 C:\Project\QLSinhVien\QLSinhVien\bin\System.Web.WebPages.dll
 C:\Project\QLSinhVien\QLSinhVien\bin\System.Web.WebPages.Razor.dll
 C:\Project\QLSinhVien\QLSinhVien\bin\WebGrease.dll
+C:\Project\QLSinhVien\QLSinhVien\bin\Excel.pdb
 C:\Project\QLSinhVien\QLSinhVien\bin\Microsoft.AI.DependencyCollector.xml
 C:\Project\QLSinhVien\QLSinhVien\bin\Microsoft.AI.ServerTelemetryChannel.xml
 C:\Project\QLSinhVien\QLSinhVien\bin\Microsoft.AI.Web.xml
@@ -80,8 +83,5 @@ C:\Project\QLSinhVien\QLSinhVien\bin\Microsoft.Owin.Security.MicrosoftAccount.xm
 C:\Project\QLSinhVien\QLSinhVien\obj\Debug\QLSinhVien.csprojResolveAssemblyReference.cache
 C:\Project\QLSinhVien\QLSinhVien\obj\Debug\QLSinhVien.dll
 C:\Project\QLSinhVien\QLSinhVien\obj\Debug\QLSinhVien.pdb
-C:\Project\QLSinhVien\QLSinhVien\obj\Debug\QLSinhVien.Migrations.INIT.resources
+C:\Project\QLSinhVien\QLSinhVien\obj\Debug\QLSinhVien.Migrations.Init.resources
 C:\Project\QLSinhVien\QLSinhVien\obj\Debug\QLSinhVien.csproj.GenerateResource.Cache
-C:\Project\QLSinhVien\QLSinhVien\bin\Excel.dll
-C:\Project\QLSinhVien\QLSinhVien\bin\ICSharpCode.SharpZipLib.dll
-C:\Project\QLSinhVien\QLSinhVien\bin\Excel.pdb

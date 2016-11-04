@@ -34,14 +34,39 @@ namespace QLSinhVien.Controllers
             {
                 return HttpNotFound();
             }
-            var dsmh = db.MonHoc.Where(m => m.KhoaHocID == id);
+
+            #region truy suất danh sách môn học trong khóa học
+            // lấy danh sách môn học
+            var dsmh = db.KhoaHocMonHoc.Where(m => m.KhoaHocID == id);
+            // đưa dữ liệu danh sách môn học sang View
             if (dsmh.Count() > 0)
             {
                 ViewBag.DSMonHoc = dsmh;
                 @TempData["SLMonHoc"] = dsmh.Count();
             }
-            else { @TempData["SLMonHoc"] = 0; }
-            
+            else
+            {
+                @TempData["SLMonHoc"] = 0;
+            }
+
+            #endregion
+
+            #region truy suất danh sách sinh viên trong khóa học
+            // lấy danh sách môn học
+            var dssv = db.DangKyKhoaHoc.Where(m => m.KhoaHocID == id);
+            // đưa dữ liệu danh sách môn học sang View
+            if (dssv.Count() > 0)
+            {
+                ViewBag.DSSinhVien = dssv;
+                @TempData["SLSinhVien"] = dssv.Count();
+            }
+            else
+            {
+                @TempData["SLSinhVien"] = 0;
+            }
+
+            #endregion
+
             return View(khoaHoc);
         }
 

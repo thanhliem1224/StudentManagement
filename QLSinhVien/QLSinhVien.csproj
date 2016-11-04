@@ -207,21 +207,23 @@
     <Compile Include="Controllers\DangKyKhoaHocController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhoaHocController.cs" />
+    <Compile Include="Controllers\KhoaHocMonHocController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MonHocController.cs" />
     <Compile Include="Controllers\SinhVienController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201610310833322_INIT.cs" />
-    <Compile Include="Migrations\201610310833322_INIT.Designer.cs">
-      <DependentUpon>201610310833322_INIT.cs</DependentUpon>
+    <Compile Include="Migrations\201611040317216_Init.cs" />
+    <Compile Include="Migrations\201611040317216_Init.Designer.cs">
+      <DependentUpon>201611040317216_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\DangKyKhoaHoc.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\KhoaHoc.cs" />
+    <Compile Include="Models\KhoaHoc_MonHoc.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MonHoc.cs" />
     <Compile Include="Models\SinhVien.cs" />
@@ -299,10 +301,6 @@
     <Content Include="Views\KhoaHoc\Details.cshtml" />
     <Content Include="Views\KhoaHoc\Edit.cshtml" />
     <Content Include="Views\KhoaHoc\Index.cshtml" />
-    <Content Include="Views\MonHoc\Delete.cshtml" />
-    <Content Include="Views\MonHoc\Details.cshtml" />
-    <Content Include="Views\MonHoc\Edit.cshtml" />
-    <Content Include="Views\MonHoc\Index.cshtml" />
     <Content Include="Views\DangKyKhoaHoc\Create.cshtml" />
     <Content Include="Views\DangKyKhoaHoc\Delete.cshtml" />
     <Content Include="Views\DangKyKhoaHoc\Details.cshtml" />
@@ -310,7 +308,18 @@
     <Content Include="Views\DangKyKhoaHoc\Index.cshtml" />
     <Content Include="Views\DangKyKhoaHoc\KhoaHoc.cshtml" />
     <Content Include="Views\DangKyKhoaHoc\TimKhoaHoc.cshtml" />
-    <Content Include="Views\MonHoc\TimKhoaHoc.cshtml" />
+    <Content Include="Views\MonHoc\Create.cshtml" />
+    <Content Include="Views\MonHoc\Delete.cshtml" />
+    <Content Include="Views\MonHoc\Details.cshtml" />
+    <Content Include="Views\MonHoc\Edit.cshtml" />
+    <Content Include="Views\MonHoc\Index.cshtml" />
+    <Content Include="Views\KhoaHocMonHoc\Create.cshtml" />
+    <Content Include="Views\KhoaHocMonHoc\Delete.cshtml" />
+    <Content Include="Views\KhoaHocMonHoc\Details.cshtml" />
+    <Content Include="Views\KhoaHocMonHoc\Edit.cshtml" />
+    <Content Include="Views\KhoaHocMonHoc\Index.cshtml" />
+    <Content Include="Views\KhoaHocMonHoc\TimKhoaHoc.cshtml" />
+    <Content Include="Views\KhoaHocMonHoc\KhoaHoc.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -324,8 +333,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610310833322_INIT.resx">
-      <DependentUpon>201610310833322_INIT.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201611040317216_Init.resx">
+      <DependentUpon>201611040317216_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

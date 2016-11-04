@@ -1,0 +1,35 @@
+﻿@model QLSinhVien.Models.KhoaHoc_MonHoc
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>KhoaHoc_MonHoc</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.KhoaHoc.TenKhoaHoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KhoaHoc.TenKhoaHoc)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MonHoc.TenMonHoc)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MonHoc.TenMonHoc)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

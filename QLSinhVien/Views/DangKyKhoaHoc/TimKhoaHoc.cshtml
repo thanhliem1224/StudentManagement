@@ -11,6 +11,10 @@
         <div class="col-md-3">
             <label for="tenHS" class="control-label">Tìm Khóa học</label>
             @Html.TextBox("tenKhoaHoc", null, new { @class = "form-control", @id = "tenHS", @placeholder = "Tên Khóa học" })
+            @if (TempData["Message_Fa"] != null)
+            {
+                <p class="text-danger">@TempData["Message_Fa"]</p>
+            }
         </div>
         <div class="col-md-1">
             <div class="control-label">
@@ -20,14 +24,7 @@
         </div>
     }
 </div>
-@if (TempData["Message_Fa"] != null)
-            {
-    <p class="text-center text-danger">@TempData["Message_Fa"]</p>
-}
-@if (TempData["Message_Su"] != null)
-            {
-    <p class="text-center text-success">@TempData["Message_Su"]</p>
-}
+
 <br />
 <h3>@TempData["Title"]</h3>
 @if (ViewBag.DSTimKiem != null)

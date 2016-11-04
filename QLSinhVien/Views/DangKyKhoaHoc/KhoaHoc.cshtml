@@ -1,16 +1,28 @@
 ﻿@model QLSinhVien.Models.KhoaHoc
 @{
-    ViewBag.Title = "KhoaHoc";
+    ViewBag.Title = "Đăng Ký Khóa Học";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="text-center">Đăng Ký Khóa Học</h2>
+<h2 class="text-center">@ViewBag.Title</h2>
 <br />
 <div>
     <div class="row">
         <div class="col-md-6">
             <h2 class="text-center">@Html.DisplayFor(model => model.TenKhoaHoc)</h2>
             <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.ThoiGianBatDau)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ThoiGianBatDau)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.ThoiGianKetThuc)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ThoiGianKetThuc)
+                </dd>
                 <dt>
                     Sinh Viên Đã Đăng Ký
                 </dt>
@@ -28,24 +40,22 @@
                             <div class="col-md-8">
                                 <label class="control-label">Tìm tên sinh viên</label>
                                 <input type="text" name="tenSV" class="form-control" />
+                                @if (TempData["Success"] != null)
+                                {
+                                    <h5 class="text-success">@TempData["Success"]</h5>
+                                }
+                                @if (ViewBag.KQTimKiemSV == null)
+                                {
+                                    <h5 class="text-danger">@TempData["Mess"]</h5>
+                                }
                             </div>
                             <div class="col-md-4">
                                 <br />
                                 <input type="submit" value="Tìm" class="btn btn-primary" />
                             </div>
                         }
-                        @if (TempData["Success"] != null)
-                        {
-                            <h5 class="text-success">@TempData["Success"]</h5>
-                        }
-                    </div>
-                    <div class="row">
-                        @if (ViewBag.KQTimKiemSV == null)
-                        {
-                            <h5 class="text-danger">@TempData["Search_result"]</h5>
-                        }
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </div>
@@ -62,7 +72,7 @@
         @if (ViewBag.DSSinhVien != null)
         {
             <div class="table-responsive">
-                <h3 class="text-center">Danh sách sinh viên trong lớp</h3>
+                <h3 class="text-center">Danh sách học viên</h3>
                 <table class="table table-hover">
                     <thead>
                         <tr>
@@ -179,6 +189,7 @@
                 </dl>
             </div>
             <div class="modal-footer">
+
                 <button id="ConfirmSubmit" type="button" class="btn btn-success">Đồng Ý</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
             </div>

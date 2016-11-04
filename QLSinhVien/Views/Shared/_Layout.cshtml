@@ -21,10 +21,22 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("QL Sinh Viên", "Index", "SinhVien")</li>
-                    <li>@Html.ActionLink("QL Khóa Học", "Index", "KhoaHoc")</li>
-                    <li>@Html.ActionLink("QL Môn Học", "Index", "MonHoc")</li>
-                    <li>@Html.ActionLink("Đăng Ký Khóa Học ", "TimKhoaHoc", "DangKyKhoaHoc")</li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" role="button" aria-expanded="false" aria-haspopup="true" href="#" data-toggle="dropdown">Quản Lý</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Danh Sách Sinh Viên", "Index", "SinhVien")</li>
+                            <li>@Html.ActionLink("Danh Sách Khóa Học", "Index", "KhoaHoc")</li>
+                            <li>@Html.ActionLink("Danh Sách Môn Học", "Index", "MonHoc")</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" role="button" aria-expanded="false" aria-haspopup="true" href="#" data-toggle="dropdown">Hoạt Động</a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Thêm Môn Học Vào Khóa Học", "TimKhoaHoc", "KhoaHocMonHoc")</li>
+                            <li>@Html.ActionLink("Đăng Ký Khóa Học Cho Sinh Viên", "TimKhoaHoc", "DangKyKhoaHoc")</li>
+
+                        </ul>
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

@@ -36,6 +36,7 @@ namespace QLSinhVien.Models
         public DbSet<MonHoc> MonHoc { get; set; }
         public DbSet<KhoaHoc> KhoaHoc { get; set; }
         public DbSet<DangKyKhoaHoc> DangKyKhoaHoc { get; set; }
+        public DbSet<KhoaHoc_MonHoc> KhoaHocMonHoc { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

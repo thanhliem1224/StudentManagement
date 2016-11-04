@@ -9,11 +9,9 @@ namespace QLSinhVien.Models
     public class MonHoc
     {
         public int ID { get; set; }
-        [Display(Name = "Tên Môn Học")]
+        [Display(Name = "Tên Môn Học"), Required(ErrorMessage = "Vui lòng điền tên môn học")]
         public string TenMonHoc { get; set; }
-        [Display(Name = "Tên Khóa Học")]
-        public int KhoaHocID { get; set; }
 
-        public virtual KhoaHoc KhoaHoc { get; set; }
+        public virtual ICollection<KhoaHoc_MonHoc> KhoaHocMonHoc { get; set; }
     }
 }

@@ -47,12 +47,12 @@ namespace QLSinhVien.Controllers
                 var ds = db.KhoaHoc.Where(hs => hs.TenKhoaHoc.Contains(tenKhoaHoc));
                 if (ds.Count() > 0) // nếu có kết quả
                 {
-                    TempData["Title"] = "Kết quả tìm kiếm " + tenKhoaHoc + " (" + ds.Count() + " kết quả)";
+                    TempData["Title"] = "Kết quả tìm kiếm \"" + tenKhoaHoc + "\" (" + ds.Count() + " kết quả)";
                     ViewBag.DSTimKiem = ds;
                 }
                 else
                 {
-                    TempData["Message_Fa"] = "Không tìm thấy lop \"" + tenKhoaHoc + "\"";
+                    TempData["Message_Fa"] = "Không tìm thấy khóa học \"" + tenKhoaHoc + "\"";
                 }
             }
             return View();
@@ -76,17 +76,17 @@ namespace QLSinhVien.Controllers
             if (!string.IsNullOrEmpty(tenSV))
             {
 
-                var dskqsv = db.SinhVien.Where(s => s.Ten.Contains(tenSV));
+                var dskqsv = db.SinhVien.Where(s => s.Ten.Contains(tenSV) || s.Ho.Contains(tenSV));
 
 
                 if (dskqsv.Count() > 0)// neu có kết quả tìm kiếm
                 {
-                    TempData["Search_result"] = "Kết quả tìm kiếm " + tenSV + "(" + dskqsv.Count() + " kết quả)";
+                    TempData["Search_result"] = "Kết quả tìm kiếm \"" + tenSV + "\" (" + dskqsv.Count() + " kết quả)";
                     ViewBag.KQTimKiemSV = dskqsv;
                 }
                 else
                 {
-                    TempData["Search_result"] = "Không tìm thấy " + tenSV;
+                    TempData["Mess"] = "Không tìm thấy sinh vên \"" + tenSV + "\"";
                 }
             }
             #endregion
@@ -127,14 +127,22 @@ namespace QLSinhVien.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.DangKyKhoaHoc.Add(dangKyKhoaHoc);
-                db.SaveChanges();
-                return RedirectToAction("KhoaHoc", "DangKyKhoaHoc", new { id = dangKyKhoaHoc.KhoaHocID });
+                string tenSinhVien = db.SinhVien.Find(dangKyKhoaHoc.SinhVienID).HoVaTen;
+                // kiem tra exits
+                var check = db.DangKyKhoaHoc.Where(d => d.KhoaHocID == dangKyKhoaHoc.KhoaHocID).Where(d => d.SinhVienID == dangKyKhoaHoc.SinhVienID);
+                if (check.Count() > 0)
+                {
+                    TempData["Mess"] = "Sinh viên \"" + tenSinhVien + "\" đã tham gia vào khóa học này";
+                }
+                else
+                {
+                    db.DangKyKhoaHoc.Add(dangKyKhoaHoc);
+                    db.SaveChanges();
+                    TempData["Success"] = "Thêm thành công sinh viên \"" + tenSinhVien + "\"";
+                    return RedirectToAction("KhoaHoc", "DangKyKhoaHoc", new { id = dangKyKhoaHoc.KhoaHocID });
+                }
             }
-
-            ViewBag.KhoaHocID = new SelectList(db.KhoaHoc, "ID", "TenKhoaHoc", dangKyKhoaHoc.KhoaHocID);
-            ViewBag.SinhVienID = new SelectList(db.SinhVien, "ID", "Ho", dangKyKhoaHoc.SinhVienID);
-            return View(dangKyKhoaHoc);
+            return RedirectToAction("KhoaHoc", "DangKyKhoaHoc", new { id = dangKyKhoaHoc.KhoaHocID });
         }
 
         // GET: DangKyKhoaHoc/Edit/5

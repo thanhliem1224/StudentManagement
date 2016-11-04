@@ -7,8 +7,26 @@
 <h2 class="text-center">Chi tiết khóa học</h2>
 
 <div class="row">
-    <h3 class="text-center">@Model.TenKhoaHoc</h3>
-    <hr />
+    <div class="col-md-offset-2 col-md-8">
+        <h3 class="text-center">@Model.TenKhoaHoc</h3>
+    </div>
+    <div class="col-md-2">
+        <br />
+        <div class="text-right">
+            <div class="dropdown ">
+                <button class="btn btn-success dropdown-toggle" type="button" data-toggle="dropdown">
+                    Thêm
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li>@Html.ActionLink("Thêm Môn Học", "KhoaHoc", "KhoaHocMonHoc", new { @id = Model.ID }, null)</li>
+                    <li>@Html.ActionLink("Thêm Học Viên", "KhoaHoc", "DangKyKhoaHoc", new { @id = Model.ID }, null)</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
     <dl class="dl-horizontal">
         <dt>
             @Html.DisplayNameFor(model => model.ThoiGianBatDau)
@@ -39,7 +57,7 @@
         </dt>
 
         <dd>
-            @TempData["SLHocVien"]
+            @TempData["SLSinhVien"]
         </dd>
     </dl>
 </div>
@@ -49,111 +67,92 @@
     @Html.ActionLink("Back to List", "Index")
 </p>
 <br />
-<div class="row">
-    <div class="col-md-offset-2 col-md-8">
-        <h3 class="text-center">Danh sách môn học trong khóa học</h3>
-    </div>
-    <div class="col-md-2">
-        <br />
-        <button id="popup" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Thêm Môn Học</button>
-        @*<a href="~/KhoaHoc/Create" class="btn btn-success active" role="button">Thêm môn học</a>*@
-    </div>
 
-</div>
-
-@if (ViewBag.DSMonHoc != null)
-{
-    <div class="table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>
-                        Tên Môn Học
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in ViewBag.DSMonHoc)
-                {
-                    <tr>
-                        <td>
-                            @item.TenMonHoc
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-}
-
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Xác Nhận Đăng Ký Khóa Học</h4>
-            </div>
-            <div class="modal-body">
-                @using (Html.BeginForm("Create", "MonHoc", FormMethod.Post, new { @id = "formCreate" }))
-                {
-                    @Html.AntiForgeryToken()
-
-                    <div class="form-horizontal">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            <label class="control-label">Teen Moon Hojc</label>
-                            <div>
-                                <input type="text" name="TenMonHoc" required/>
-                            </div>
-                        </div>
-                        <div class="form-group hidden">
-                            <label class="control-label col-md-2">Teen Moon Hojc</label>
-                            <div class="col-md-10">
-                                <input type="text" name="KhoaHocID" value="@Model.ID" />
-                            </div>
-                        </div>
-                        @*<div class="form-group">
-                                <div class="col-md-offset-2 col-md-10">
-                                    <input type="submit" value="Create" class="btn btn-default" />
-                                </div>
-                            </div>*@
-                    </div>
-                }
-            </div>
-            <div class="modal-footer">
-                <button id="ConfirmSubmit" type="button" class="btn btn-success">Đồng Ý</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Hủy</button>
-            </div>
+<ul class="nav nav-tabs nav-justified">
+    <li class="active"><a data-toggle="tab" href="#mon_hoc"><h4>Danh Sách Môn Học</h4></a></li>
+    <li><a data-toggle="tab" href="#hoc_sinh"><h4>Danh Sách Học Viên</h4></a></li>
+</ul>
+<div class="tab-content">
+    <div id="mon_hoc" class="tab-pane fade in active">
+        <div class="row">
+            <h3 class="text-center">Danh sách môn học trong khóa học</h3>
         </div>
-
+        <div class="row">
+            @if (ViewBag.DSMonHoc != null)
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Tên Môn Học
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.DSMonHoc)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.MonHoc.TenMonHoc
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p>Không có môn học trong khóa học này</p>
+            }
+        </div>
+    </div>
+    <div id="hoc_sinh" class="tab-pane fade in">
+        <div class="row">
+            <h3 class="text-center">Danh sách học viên trong khóa học</h3>
+        </div>
+        <div class="row">
+            @if (ViewBag.DSSinhVien != null)
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>
+                                    Tên Sinh Viên
+                                </th>
+                                <th>
+                                    Ngày Sinh
+                                </th>
+                                <th>
+                                    Số DT
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in ViewBag.DSSinhVien)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.SinhVien.HoVaTen
+                                    </td>
+                                    <td>
+                                        @item.SinhVien.NgaySinh
+                                    </td>
+                                    <td>
+                                        @item.SinhVien.SoDienThoai
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p>Không có học viên trong khóa học này</p>
+            }
+        </div>
     </div>
 </div>
-
-
-@section Scripts{
-    <script type="text/javascript">
-
-        jQuery(document).ready(function ($) {
-            $(".clickable-row").click(function () {
-                var data = $(this).data("href").split('#');
-
-                var kh = @Model.ID;
-                $("#KhoaHocID").val(kh);
-                $("#SinhVienID").val(data[0]);
-
-
-                $("#tensinhvien").text(data[1]);
-                $("#tenkhoahoc").text(data[2]);
-                document.getElementById("popup").click()
-            });
-
-            $("#ConfirmSubmit").click(function(){
-                $("#formCreate").submit();
-            })
-        });
-    </script>
-}
-
-
